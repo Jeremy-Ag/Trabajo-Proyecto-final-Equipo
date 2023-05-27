@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Formulario Registro</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title">EcoMatch</h1>
+        </div>
+    </header>
+    <section class="form-register">
+        <h4>Formulario Registro</h4>
+        <input class="controls" type="text" name="username" id="username" placeholder="Ingrese su nombre">
+        <input class="controls" type="email" name="email" id="email" placeholder="Ingrese su Correo">
+        <input class="controls" type="password" name="password" id="password" placeholder="Ingrese su Contraseña">
+
+        <input class="botons" type="submit" id="sighUp" name="signup_submit" value="Sign up">
+        <p><a href="index.html">¿Ya tengo Cuenta? </a></p>
+
+    </section>
+    <main role="main" class="container-fluid" id="app">
+        <footer>
+            <h3><a href="index.html">EcoMatch</a></h3>
+            <nav>
+                <ul>
+                    <a @click="mostrarCreditos" href="#">Acerca de</a>
+                    <a href="contacto.html">Contáctame</a>
+                </ul>
+            </nav>
+            <div class="redes-sociales">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <a>&copy;EcoMatch - Todos los derechos reservados</a>
+        </footer>
+    </main>
+
+    <script src="./js/sweetalert2.all.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/script.js"></script>
+
+</body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDSVvZwQszashkFgbvM8oM4M-SFqbgFE08",
+        authDomain: "proyecto-final-e38ad.firebaseapp.com",
+        databaseURL: "https://proyecto-final-e38ad-default-rtdb.firebaseio.com",
+        projectId: "proyecto-final-e38ad",
+        storageBucket: "proyecto-final-e38ad.appspot.com",
+        messagingSenderId: "368554888307",
+        appId: "1:368554888307:web:e6f79cf28fd7e724156e06"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    sighUp.addEventListener('click',(e) => {
+
+var email = document.getElementById('email').value;
+var password = document.getElementById('password').value;
+var username = document.getElementById('username').value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+
+                set(ref(database, 'users/' + user.uid),{
+                    username: username,
+                    email: email
+                })
+                alert('usuario creado');
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                alert(errorMessage);
+                // ..
+            });
+
+    });
+</script>
+
+</html>

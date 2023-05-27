@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <meta name="descripción" content="Jugar memorama">
+    <title>EcoMatch</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <main role="main" class="container-fluid" id="app">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center"> <a class="text-center2" href="index.html">EcoMatch</a> </h1>
+                <br>
+                <span class="userName">User</span>
+                <br>
+                <p>
+                    <span class="h5">Intentos: </span>
+                    {{intentos}}/{{MAXIMOS_INTENTOS}}&nbsp;<span class="h5">Aciertos:
+                    </span> {{aciertos}}
+                </p>
+            </div>
+        </div>
+        <div v-for="(fila, indiceFila) in memorama" :key="indiceFila" class="row">
+            <div :key="indiceFila+''+indiceImagen" class="col-3" v-for="(imagen, indiceImagen) in fila">
+                <div class="mb-3">
+                    <img @click="voltear(indiceFila, indiceImagen)" :class="{'girar': imagen.mostrar}" :src="(imagen.mostrar ? imagen.ruta :
+                            NOMBRE_IMAGEN_OCULTA)" class="card-img-top img-fluid
+                            img-thumbnail">
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h3><a href="index.html">EcoMatch</a></h3>
+            <nav>
+                <ul>
+                    <a @click="mostrarCreditos" href="#">Acerca de</a>
+                    <a href="contacto.html">Contáctame</a>
+                </ul>
+            </nav>
+            <div class="redes-sociales">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <a>&copy;EcoMatch - Todos los derechos reservados</a>
+        </footer>
+    </main>
+    <script src="./js/sweetalert2.all.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDSVvZwQszashkFgbvM8oM4M-SFqbgFE08",
+        authDomain: "proyecto-final-e38ad.firebaseapp.com",
+        databaseURL: "https://proyecto-final-e38ad-default-rtdb.firebaseio.com",
+        projectId: "proyecto-final-e38ad",
+        storageBucket: "proyecto-final-e38ad.appspot.com",
+        messagingSenderId: "368554888307",
+        appId: "1:368554888307:web:e6f79cf28fd7e724156e06"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    sighUp.addEventListener('click', (e) => {
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var username = document.getElementById('username').value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+
+                set(ref(database, 'users/' + user.uid), {
+                    username: username,
+                    email: email
+                })
+                alert('usuario creado');
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                alert(errorMessage);
+                // ..
+            });
+
+    });
+
+    login.addEventListener('click', (e) => {
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+
+                const dt = new Date();
+                update(ref(database, 'users/' + user.uid), {
+                    last_login: dt,
+                })
+
+                alert('Iniciando sesión!');
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                alert(errorMessage);
+            });
+    });
+
+    const user = userCredential.user;
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            // ...
+        } else {
+            // User is signed out
+            // ...
+        }
+    });
+
+    logout.addEventListener('click', (e) => {
+
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            alert('Sesión cerrada');
+        }).catch((error) => {
+            // An error happened.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            alert(errorMessage);
+        });
+    });
+</script>
+
+</html>

@@ -1,0 +1,206 @@
+/* Estilos generales */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: black;
+	font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.container {
+	min-width: 768px;
+	margin: 0 auto;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+/* Estilos del título */
+.title {
+	font-size: 5rem;
+	color: green;
+	text-align: center;
+	margin-bottom: 40px;
+	border: 5px solid purple;
+	border-radius: 20px;
+	text-shadow: 0 0 5px purple, 0 0 10px purple, 0 0 15px purple, 0 0 20px purple, 0 0 5px purple, 0 0 5px purple, 0 0 5px purple;
+	animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.2);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+/* Estilos de los botones */
+
+
+
+.button-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	height: 100px;
+	margin: 10px;
+	font-size: 1rem;
+	color: white;
+	background-color: green;
+	border: 4px solid purple;
+	border-radius: 0;
+	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+.button:before {
+	content: '';
+	position: absolute;
+}
+
+.button:hover:before {
+	top: 0;
+}
+
+.button:active {
+	box-shadow: none;
+}
+
+.button:active:before {
+	height: 0%;
+}
+
+/* Estilos para dispositivos móviles */
+@media (min-width: 768px) {
+	.title {
+		font-size: 5rem;
+	}
+
+	.button-list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.button {
+		margin: 20px;
+	}
+}
+
+/*Para que desapareza el div del formulario */
+#form-container {
+	display: none;
+}
+
+#form-container.show {
+	display: block;
+}
+
+/*Estilos del formulario oculto */
+.formulario {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fefefe;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 400px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
+
+.formulario h2 {
+	margin-top: 0;
+}
+
+.formulario label,
+.formulario input,
+.formulario textarea {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.formulario input[type="submit"],
+.formulario button {
+	margin-top: 20px;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+	outline: none;
+	border-color: #4CAF50;
+	box-shadow: 0px 0px 5px #4CAF50;
+}
+
+/* Pie de página */
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 20px;
+	margin-top: 100px;
+}
+
+footer h3 {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+	letter-spacing: 1px;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: center;
+}
+
+footer nav a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 1.2rem;
+	margin: 0 10px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: color 0.3s ease-in-out;
+}
+
+footer nav a:hover {
+	color: #ff5e5e;
+}
+
+footer h3 a {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+	letter-spacing: 1px;
+}
+
+.redes-sociales a {
+	color: #fff;
+	text-decoration: none;
+	margin: 0 5px;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <meta name="descripción" content="Jugar memorama">
+    <title>EcoMatch</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center"> <a class="text-center2" href="index.html">EcoMatch</a> </h1>
+        </div>
+    </div>
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <form class="contacto">
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required />
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+                <div>
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" required></textarea>
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+        <main role="main" class="container-fluid" id="app">
+            <footer>
+                <h3><a href="index.html">EcoMatch</a></h3>
+                <nav>
+                    <ul>
+                        <a @click="mostrarCreditos" href="#">Acerca de</a>
+                        <a href="contacto.html">Contáctame</a>
+                    </ul>
+                </nav>
+                <div class="redes-sociales">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+                <a>&copy;EcoMatch - Todos los derechos reservados</a>
+            </footer>
+        </main>
+        <script src="./js/sweetalert2.all.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
